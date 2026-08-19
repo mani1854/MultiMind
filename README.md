@@ -360,13 +360,7 @@ Full interactive docs at **http://127.0.0.1:8000/docs**
 | Testing | Pytest + httpx AsyncClient |
 | Containerization | Docker + Docker Compose |
 
----
 
-## 📄 License
-
-MIT — see [LICENSE](LICENSE)
-
----
 
 <div align="center">
   Built with ❤️ for enterprise AI workflows
