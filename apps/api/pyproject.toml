@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=70.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multimind-api"
+version = "0.1.0"
+description = "MultiMind — Multi-Agent Enterprise Knowledge Copilot (Phase 5: AI Chat + LLM Gateway + SSE Streaming)"
+requires-python = ">=3.11"
+dependencies = [
+  # --- Phase 1: Foundation ---
+  "fastapi>=0.112.2",          # Web framework
+  "pydantic-settings>=2.4.0",  # Reads .env files into typed settings
+  "uvicorn[standard]>=0.30.6", # ASGI server
+  "structlog>=24.4.0",         # Structured JSON logging
+  "httpx>=0.27.2",             # Async HTTP client
+
+  # --- Phase 2: Auth + RBAC ---
+  "python-jose[cryptography]>=3.3.0", # JWT generation, signing & decoding
+  "passlib[bcrypt]>=1.7.4",           # Secure password hashing
+  "bcrypt>=4.0.1",                    # Underlying bcrypt C library
+  "email-validator>=2.2.0",           # Validates email formatting
+
+  # --- Phase 3: Document Management & Knowledge Base ---
+  "python-multipart>=0.0.9",   # Multipart form data / file uploads in FastAPI
+  "pypdf>=4.3.1",              # PDF text extraction
+  "python-docx>=1.1.2",        # Microsoft Word (.docx) document parsing
+  "python-pptx>=0.6.23",       # Microsoft PowerPoint (.pptx) presentation parsing
+  "pandas>=2.2.2",             # CSV & tabular data extraction
+  "tabulate>=0.9.0",           # Formats dataframes into markdown tables for LLM comprehension
+
+  # --- Phase 4: RAG Pipeline + Vector DB ---
+  "qdrant-client>=1.11.1",     # Async client for Qdrant Vector Database
+
+  # --- Phase 5: LLM Gateway & AI Chat ---
+  "openai>=1.42.0",            # OpenAI Async API SDK
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.2",             # Test runner
+  "pytest-asyncio>=0.23.8",    # Async test support
+  "ruff>=0.6.2",               # Linter + formatter
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
